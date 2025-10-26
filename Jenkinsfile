@@ -4,7 +4,7 @@ pipeline {
     environment {
         BACKEND_IMAGE = "product-service:latest"
         FRONTEND_IMAGE = "frontend:latest"
-        KUBE_CONFIG = "/home/jenkins/.kube/config"  // if using local kube config
+        KUBE_CONFIG = "/var/lib/jenkins/.kube/config"  // if using local kube config
     }
 
     stages {
