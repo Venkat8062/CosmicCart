@@ -20,7 +20,7 @@ spec:
         - containerPort: 80
         env:
         - name: REACT_APP_API_URL
-          value: "http://product-service:5000"  # backend service URL inside cluster
+          value: "http://product-service:5000/api/products"  # backend service URL inside cluster
 ---
 apiVersion: v1
 kind: Service
