@@ -6,7 +6,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/products") // proxy handles the full URL
+    fetch("http://product-service:5000/products") // proxy handles the full URL
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
