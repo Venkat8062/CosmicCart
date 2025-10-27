@@ -6,17 +6,18 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/products") // proxy handles the full URL
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch products:", err);
-        setLoading(false);
-      });
-  }, []);
+  fetch("/products")
+    .then((res) => res.json())
+    .then((data) => {
+      setProducts(data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Failed to fetch products:", err);
+      setLoading(false);
+    });
+}, []);
+
 
   if (loading) return <h2>Loading products...</h2>;
 
