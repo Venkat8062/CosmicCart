@@ -5,19 +5,21 @@ function App() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-  fetch("/products")
-    .then((res) => res.json())
-    .then((data) => {
-      setProducts(data);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.error("Failed to fetch products:", err);
-      setLoading(false);
-    });
-}, []);
+  // Read backend base URL from environment variable or default to empty string
+  const backendBaseURL = process.env.REACT_APP_API_URL || "";
 
+  useEffect(() => {
+    fetch(`${backendBaseURL}/products`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch products:", err);
+        setLoading(false);
+      });
+  }, [backendBaseURL]);
 
   if (loading) return <h2>Loading products...</h2>;
 
@@ -38,4 +40,3 @@ function App() {
 }
 
 export default App;
-
