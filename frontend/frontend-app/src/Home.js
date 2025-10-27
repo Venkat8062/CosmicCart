@@ -7,11 +7,9 @@ const Home = () => {
 
   useEffect(() => {
     fetch(`${backendBaseURL}/products`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => {
-        console.error("Failed to fetch products:", err);
-      });
+      .then(res => res.json())
+      .then(data => setProducts(data))
+      .catch(err => console.error("Failed to fetch products:", err));
   }, [backendBaseURL]);
 
   return (
@@ -19,9 +17,7 @@ const Home = () => {
       {products.length === 0 ? (
         <p>No products available</p>
       ) : (
-        products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))
+        products.map(product => <ProductCard key={product.id} product={product} />)
       )}
     </div>
   );
