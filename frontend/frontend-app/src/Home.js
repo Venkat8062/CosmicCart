@@ -3,24 +3,28 @@ import ProductCard from "../components/ProductCard";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const backendBaseURL = process.env.REACT_APP_API_URL || "";
 
-  // For now, use dummy data
   useEffect(() => {
-    setProducts([
-      { id: 1, name: "Galaxy Shirt", price: 25, imageURL: "https://via.placeholder.com/200" },
-      { id: 2, name: "Star Mug", price: 15, imageURL: "https://via.placeholder.com/200" },
-      { id: 3, name: "Rocket Cap", price: 20, imageURL: "https://via.placeholder.com/200" }
-    ]);
-  }, []);
+    fetch(`${backendBaseURL}/products`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => {
+        console.error("Failed to fetch products:", err);
+      });
+  }, [backendBaseURL]);
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-      {products.map(product => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      {products.length === 0 ? (
+        <p>No products available</p>
+      ) : (
+        products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))
+      )}
     </div>
   );
 };
 
 export default Home;
-
